@@ -1,27 +1,30 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Создаем стейты для имени и фамилии
-	const [name, setName] = useState('John')
-	const [surname, setSurname] = useState('Doe')
+	// Стейт для отслеживания статуса пользователя (забанен или нет)
+	const [isBanned, setIsBanned] = useState(false)
 
-	// Функции для изменения значений
-	const changeName = () => {
-		setName('Alex')
+	// Функция для бана
+	const banUser = () => {
+		setIsBanned(true)
 	}
 
-	const changeSurname = () => {
-		setSurname('Smith')
+	// Функция для разбана
+	const unbanUser = () => {
+		setIsBanned(false)
 	}
 
 	return (
 		<div>
-			<h1>Данные пользователя</h1>
-			<p>Имя: {name}</p>
-			<p>Фамилия: {surname}</p>
+			<h1>{isBanned ? 'Пользователь забанен' : 'Пользователь не забанен'}</h1>
 
-			<button onClick={changeName}>Изменить имя</button>
-			<button onClick={changeSurname}>Изменить фамилию</button>
+			{/* Кнопки для бана и разбана */}
+			<button onClick={banUser} disabled={isBanned}>
+				Забанить пользователя
+			</button>
+			<button onClick={unbanUser} disabled={!isBanned}>
+				Разбанить пользователя
+			</button>
 		</div>
 	)
 }
