@@ -1,10 +1,12 @@
 function App() {
-	const arr = [<li>1</li>, <li>2</li>, <li>3</li>, <li>4</li>, <li>5</li>]
+	const arr = ['a', 'b', 'c', 'd', 'e']
 
 	return (
 		<ul>
-			{arr.map(item => item)}{' '}
-			{/* Мапим элементы массива и отображаем их внутри ul */}
+			{arr.map(item => (
+				<li key={item}>{item}</li>
+			))}{' '}
+			{/* Используем map для генерации li для каждого элемента массива */}
 		</ul>
 	)
 }
