@@ -1,46 +1,71 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Инициализация массива элементов
-	const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3'])
+	// Инициализация массива с числами
+	const [numbers, setNumbers] = useState([1, 2, 3, 4, 5])
+	const [inputValue, setInputValue] = useState('')
 
-	// Функция для добавления нового элемента в конец массива
-	const addItem = () => {
-		setItems([...items, `Item ${items.length + 1}`])
+	// Функция для возведения числа в квадрат
+	const handleSquare = index => {
+		const newNumbers = [...numbers]
+		newNumbers[index] = newNumbers[index] ** 2
+		setNumbers(newNumbers)
 	}
 
-	// Функция для добавления нового элемента из инпута
-	const [inputText, setInputText] = useState('')
+	// Функция для удаления элемента
+	const handleDelete = index => {
+		const newNumbers = numbers.filter((_, i) => i !== index)
+		setNumbers(newNumbers)
+	}
 
-	const addItemFromInput = () => {
-		if (inputText.trim()) {
-			setItems([...items, inputText])
-			setInputText('') // Очистка инпута после добавления
-		}
+	// Функция для переворота порядка списка
+	const reverseOrder = () => {
+		setNumbers([...numbers].reverse())
+	}
+
+	// Функция для установки текста в инпут при клике на li
+	const handleClick = text => {
+		setInputValue(text)
+	}
+
+	// Функция для обновления текста в li при потере фокуса
+	const handleBlur = index => {
+		const newNumbers = [...numbers]
+		newNumbers[index] = inputValue
+		setNumbers(newNumbers)
 	}
 
 	return (
 		<div>
-			<h1>Список:</h1>
+			<h1>Список чисел</h1>
 			<ul>
-				{items.map((item, index) => (
-					<li key={index}>{item}</li>
+				{numbers.map((number, index) => (
+					<li key={index}>
+						{number}
+						<button onClick={() => handleDelete(index)}>Удалить</button>
+						<button onClick={() => handleSquare(index)}>Квадрат</button>
+					</li>
 				))}
 			</ul>
 
-			{/* Кнопка для добавления элемента в конец списка */}
-			<button onClick={addItem}>Добавить элемент</button>
+			<button onClick={reverseOrder}>Перевернуть порядок</button>
 
-			{/* Инпут и кнопка для добавления нового элемента из текста инпута */}
-			<div>
-				<input
-					type='text'
-					value={inputText}
-					onChange={e => setInputText(e.target.value)}
-					placeholder='Введите текст'
-				/>
-				<button onClick={addItemFromInput}>Добавить из инпута</button>
-			</div>
+			<input
+				type='text'
+				value={inputValue}
+				onChange={e => setInputValue(e.target.value)}
+				onBlur={() => handleBlur(numbers.indexOf(inputValue))}
+				placeholder='Изменить число'
+			/>
+
+			<h2>Кликните на число, чтобы изменить его:</h2>
+			<ul>
+				{numbers.map((number, index) => (
+					<li key={index} onClick={() => handleClick(number)}>
+						{number}
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }
