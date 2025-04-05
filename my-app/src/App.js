@@ -7,12 +7,15 @@ function id() {
 }
 
 // Компонент User
-function User({ name, surname, age }) {
+function User({ id, name, surname, age }) {
 	return (
 		<tr>
 			<td>{name}</td>
 			<td>{surname}</td>
 			<td>{age}</td>
+			<td>
+				<p>ID: {id}</p>
+			</td>
 		</tr>
 	)
 }
@@ -34,6 +37,7 @@ function Users() {
 						<th>Имя</th>
 						<th>Фамилия</th>
 						<th>Возраст</th>
+						<th>ID</th> {/* Новый столбец для ID */}
 					</tr>
 				</thead>
 				<tbody>
@@ -42,6 +46,7 @@ function Users() {
 						users.map(user => (
 							<User
 								key={user.id}
+								id={user.id}
 								name={user.name}
 								surname={user.surname}
 								age={user.age}
