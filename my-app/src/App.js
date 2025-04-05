@@ -1,75 +1,71 @@
 import React, { useState } from 'react'
 
 function App() {
-	const [list, setList] = useState([])
-	const [inputValue, setInputValue] = useState('')
+	const [list, setList] = useState([
+		{ id: 1, name: 'Item 1', description: 'Description 1' },
+		{ id: 2, name: 'Item 2', description: 'Description 2' },
+		{ id: 3, name: 'Item 3', description: 'Description 3' },
+	])
 
-	// Добавление нового элемента в список
-	const addItem = () => {
-		setList([...list, inputValue])
-		setInputValue('')
+	// Функция для удаления элемента
+	const deleteItem = id => {
+		setList(list.filter(item => item.id !== id))
 	}
 
-	// Функция для добавления элемента с использованием нескольких инпутов
-	const [input1, setInput1] = useState('')
-	const [input2, setInput2] = useState('')
-	const [input3, setInput3] = useState('')
+	// Функции для редактирования элемента
+	const [name, setName] = useState('')
+	const [description, setDescription] = useState('')
 
-	const addItemWithInputs = () => {
-		const newItem = `${input1} ${input2} ${input3}`
-		setList([...list, newItem])
-		setInput1('')
-		setInput2('')
-		setInput3('')
+	const editItem = id => {
+		const updatedList = list.map(item => {
+			if (item.id === id) {
+				return { ...item, name, description }
+			}
+			return item
+		})
+		setList(updatedList)
+	}
+
+	// Функция для заполнения инпутов данными элемента
+	const fillInputs = id => {
+		const item = list.find(item => item.id === id)
+		if (item) {
+			setName(item.name)
+			setDescription(item.description)
+		}
 	}
 
 	return (
 		<div>
-			<h1>Добавить элемент в список</h1>
-
-			{/* Кнопка для добавления одного элемента */}
-			<input
-				type='text'
-				value={inputValue}
-				onChange={e => setInputValue(e.target.value)}
-				placeholder='Введите текст'
-			/>
-			<button onClick={addItem}>Добавить элемент</button>
+			<h1>Редактирование и удаление элементов</h1>
 
 			<ul>
-				{list.map((item, index) => (
-					<li key={index}>{item}</li>
+				{list.map(item => (
+					<li key={item.id}>
+						{item.name} - {item.description}
+						{/* Кнопка для удаления элемента */}
+						<button onClick={() => deleteItem(item.id)}>Удалить</button>
+						{/* Кнопка для заполнения инпутов данными элемента */}
+						<button onClick={() => fillInputs(item.id)}>Редактировать</button>
+					</li>
 				))}
 			</ul>
 
-			<h2>Добавить элемент с тремя инпутами</h2>
-
-			{/* Три инпута для добавления нового элемента */}
+			<h2>Редактирование элемента</h2>
 			<input
 				type='text'
-				value={input1}
-				onChange={e => setInput1(e.target.value)}
-				placeholder='Первое поле'
+				value={name}
+				onChange={e => setName(e.target.value)}
+				placeholder='Имя'
 			/>
 			<input
 				type='text'
-				value={input2}
-				onChange={e => setInput2(e.target.value)}
-				placeholder='Второе поле'
+				value={description}
+				onChange={e => setDescription(e.target.value)}
+				placeholder='Описание'
 			/>
-			<input
-				type='text'
-				value={input3}
-				onChange={e => setInput3(e.target.value)}
-				placeholder='Третье поле'
-			/>
-			<button onClick={addItemWithInputs}>Добавить с инпутами</button>
-
-			<ul>
-				{list.map((item, index) => (
-					<li key={index}>{item}</li>
-				))}
-			</ul>
+			{/* Кнопка для обновления элемента */}
+			<button onClick={() => editItem(1)}>Обновить</button>
 		</div>
 	)
 }
