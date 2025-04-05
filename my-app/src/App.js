@@ -7,7 +7,11 @@ function id() {
 }
 
 // Компонент User
-function User({ id, name, surname, age }) {
+function User({ id, name, surname, age, onBan }) {
+	const handleBanClick = () => {
+		onBan(id) // Вызов функции для бана с передачей id пользователя
+	}
+
 	return (
 		<tr>
 			<td>{name}</td>
@@ -16,17 +20,25 @@ function User({ id, name, surname, age }) {
 			<td>
 				<p>ID: {id}</p>
 			</td>
+			<td>
+				<button onClick={handleBanClick}>Забанить</button>{' '}
+				{/* Кнопка для бана */}
+			</td>
 		</tr>
 	)
 }
 
 // Компонент Users
 function Users() {
-	const [users] = useState([
+	const [users, setUsers] = useState([
 		{ id: id(), name: 'user1', surname: 'surn1', age: 30 },
 		{ id: id(), name: 'user2', surname: 'surn2', age: 31 },
 		{ id: id(), name: 'user3', surname: 'surn3', age: 32 },
 	])
+
+	const handleBanUser = userId => {
+		setUsers(users.filter(user => user.id !== userId)) // Удаление пользователя по его id
+	}
 
 	return (
 		<div>
@@ -37,7 +49,8 @@ function Users() {
 						<th>Имя</th>
 						<th>Фамилия</th>
 						<th>Возраст</th>
-						<th>ID</th> {/* Новый столбец для ID */}
+						<th>ID</th>
+						<th>Действие</th> {/* Новый столбец для кнопки */}
 					</tr>
 				</thead>
 				<tbody>
@@ -50,6 +63,7 @@ function Users() {
 								name={user.name}
 								surname={user.surname}
 								age={user.age}
+								onBan={handleBanUser} // Передача функции для бана
 							/>
 						))
 					}
