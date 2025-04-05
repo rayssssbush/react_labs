@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Создаем стейты для имени, фамилии и возраста
+	// Создаем стейты для имени и фамилии
 	const [name, setName] = useState('John')
 	const [surname, setSurname] = useState('Doe')
-	const [age, setAge] = useState(30)
+
+	// Функции для изменения значений
+	const changeName = () => {
+		setName('Alex')
+	}
+
+	const changeSurname = () => {
+		setSurname('Smith')
+	}
 
 	return (
 		<div>
 			<h1>Данные пользователя</h1>
 			<p>Имя: {name}</p>
 			<p>Фамилия: {surname}</p>
-			<p>Возраст: {age}</p>
+
+			<button onClick={changeName}>Изменить имя</button>
+			<button onClick={changeSurname}>Изменить фамилию</button>
 		</div>
 	)
 }
