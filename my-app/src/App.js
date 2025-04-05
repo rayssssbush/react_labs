@@ -1,7 +1,19 @@
-import { v4 as uuidv4 } from 'react-uuid'
+import React, { useState } from 'react'
 
-function id() {
-	return uuidv4() // Генерация уникального идентификатора в формате UUID
+function App() {
+	// Создаем стейты для имени, фамилии и возраста
+	const [name, setName] = useState('John')
+	const [surname, setSurname] = useState('Doe')
+	const [age, setAge] = useState(30)
+
+	return (
+		<div>
+			<h1>Данные пользователя</h1>
+			<p>Имя: {name}</p>
+			<p>Фамилия: {surname}</p>
+			<p>Возраст: {age}</p>
+		</div>
+	)
 }
 
-console.log(id()) // Например: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+export default App
