@@ -1,12 +1,11 @@
 function App() {
-	const arr = [1, 2, 3, 4, 5]
+	const obj = { name: 'john', surname: 'smit' }
 
 	return (
-		<ul>
-			{arr.map(item => (
-				<li key={item}>{item}</li>
-			))}
-		</ul>
+		<p>
+			name: <span>{obj.name}</span>, <br />
+			surname: <span>{obj.surname}</span>,
+		</p>
 	)
 }
 
