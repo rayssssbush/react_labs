@@ -1,12 +1,7 @@
-import faker from 'faker'
+import { nanoid } from 'nanoid'
 
-function generateRandomStringWithFaker() {
-	// Генерация случайной строки с использованием faker
-	const randomName = faker.name.findName()
-	const randomEmail = faker.internet.email()
-
-	console.log('Random Name:', randomName)
-	console.log('Random Email:', randomEmail)
+function id() {
+	return nanoid() // Генерация случайного уникального идентификатора
 }
 
-generateRandomStringWithFaker()
+console.log(id()) // Например: "V1StGXR8_Z5jdZiL3rxrKZ"
