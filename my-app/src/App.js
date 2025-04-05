@@ -1,12 +1,13 @@
+// App.js
 import React from 'react'
-import { MyContext } from './MyContext' // Импортируем контекст
+import { MyContext } from './MyContext'
+import Parent from './Parent'
 
 function App() {
 	return (
-		<div>
-			<h1>Контекст в React</h1>
-			{/* Здесь будет использоваться контекст */}
-		</div>
+		<MyContext.Provider value={42}>
+			<Parent />
+		</MyContext.Provider>
 	)
 }
 
