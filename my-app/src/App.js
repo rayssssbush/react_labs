@@ -1,130 +1,113 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Стейт для чисел в инпутах
-	const [num1, setNum1] = useState('')
-	const [num2, setNum2] = useState('')
-	const [result, setResult] = useState('')
+	const [text, setText] = useState('')
+	const [sum, setSum] = useState(0)
 
-	// Стейт для дат
-	const [date1, setDate1] = useState('')
-	const [date2, setDate2] = useState('')
-	const [dateDiff, setDateDiff] = useState('')
-
-	// Стейт для числа для вычисления суммы и произведения цифр
-	const [num, setNum] = useState('')
-	const [sumDigits, setSumDigits] = useState('')
-	const [productDivisors, setProductDivisors] = useState('')
-
-	// Функции для вычислений
-	const handleSum = () => {
-		setResult(Number(num1) + Number(num2))
-	}
-
-	const handleProduct = () => {
-		setResult(Number(num1) * Number(num2))
-	}
-
-	const handleDateDifference = () => {
-		const diffTime = new Date(date2) - new Date(date1)
-		const diffDays = Math.ceil(diffTime / (1000 * 3600 * 24))
-		setDateDiff(diffDays)
-	}
-
-	const handleSumDigits = e => {
-		const number = e.target.value
-		const sum = number.split('').reduce((acc, curr) => acc + Number(curr), 0)
-		setSumDigits(sum)
-	}
-
-	const handleProductDivisors = e => {
-		const number = e.target.value
-		const divisors = []
-		for (let i = 1; i <= number; i++) {
-			if (number % i === 0) divisors.push(i)
+	// Функция для транслитерации текста
+	const transliterate = input => {
+		const translitMap = {
+			а: 'a',
+			б: 'b',
+			в: 'v',
+			г: 'g',
+			д: 'd',
+			е: 'e',
+			ё: 'yo',
+			ж: 'zh',
+			з: 'z',
+			и: 'i',
+			й: 'y',
+			к: 'k',
+			л: 'l',
+			м: 'm',
+			н: 'n',
+			о: 'o',
+			п: 'p',
+			р: 'r',
+			с: 's',
+			т: 't',
+			у: 'u',
+			ф: 'f',
+			х: 'kh',
+			ц: 'ts',
+			ч: 'ch',
+			ш: 'sh',
+			щ: 'shch',
+			ы: 'y',
+			э: 'e',
+			ю: 'yu',
+			я: 'ya',
+			// Преобразование в верхний регистр
+			А: 'A',
+			Б: 'B',
+			В: 'V',
+			Г: 'G',
+			Д: 'D',
+			Е: 'E',
+			Ё: 'Yo',
+			Ж: 'Zh',
+			З: 'Z',
+			И: 'I',
+			Й: 'Y',
+			К: 'K',
+			Л: 'L',
+			М: 'M',
+			Н: 'N',
+			О: 'O',
+			П: 'P',
+			Р: 'R',
+			С: 'S',
+			Т: 'T',
+			У: 'U',
+			Ф: 'F',
+			Х: 'Kh',
+			Ц: 'Ts',
+			Ч: 'Ch',
+			Ш: 'Sh',
+			Щ: 'Shch',
+			Ы: 'Y',
+			Э: 'E',
+			Ю: 'Yu',
+			Я: 'Ya',
 		}
-		const product = divisors.reduce((acc, curr) => acc * curr, 1)
-		setProductDivisors(product)
+		return input
+			.split('')
+			.map(char => translitMap[char] || char)
+			.join('')
 	}
 
-	// Получаем текущую дату для инпутов
-	const currentDate = new Date().toISOString().split('T')[0]
+	// Обработчик для textarea
+	const handleTextChange = e => {
+		setText(e.target.value)
+	}
+
+	// Обработчик для суммирования чисел
+	const handleSumChange = e => {
+		const lines = e.target.value.split('\n')
+		const sum = lines.reduce((acc, line) => acc + (parseFloat(line) || 0), 0)
+		setSum(sum)
+	}
 
 	return (
 		<div>
-			{/* Задача 1 и 2 */}
+			{/* Задача 1: Транслитерация текста */}
 			<div>
-				<input
-					type='number'
-					value={num1}
-					onChange={e => setNum1(e.target.value)}
-					placeholder='Введите число 1'
+				<textarea
+					value={text}
+					onChange={handleTextChange}
+					placeholder='Введите текст'
 				/>
-				<input
-					type='number'
-					value={num2}
-					onChange={e => setNum2(e.target.value)}
-					placeholder='Введите число 2'
-				/>
-				<button onClick={handleSum}>Сумма</button>
-				<button onClick={handleProduct}>Произведение</button>
-				<p>Результат: {result}</p>
+				<p>Транслит: {transliterate(text)}</p>
 			</div>
 
-			{/* Задача 2 */}
+			{/* Задача 2: Суммирование чисел на каждой строке */}
 			<div>
-				<input
-					type='date'
-					value={date1}
-					onChange={e => setDate1(e.target.value)}
+				<textarea
+					onChange={handleSumChange}
+					placeholder='Введите числа на каждой строке'
 				/>
-				<input
-					type='date'
-					value={date2}
-					onChange={e => setDate2(e.target.value)}
-				/>
-				<button onClick={handleDateDifference}>Разница в днях</button>
-				<p>Разница в днях: {dateDiff}</p>
-			</div>
-
-			{/* Задача 3 (с текущей датой по умолчанию) */}
-			<div>
-				<input
-					type='date'
-					value={date1 || currentDate}
-					onChange={e => setDate1(e.target.value)}
-				/>
-				<input
-					type='date'
-					value={date2 || currentDate}
-					onChange={e => setDate2(e.target.value)}
-				/>
-				<button onClick={handleDateDifference}>Разница в днях</button>
-				<p>Разница в днях: {dateDiff}</p>
-			</div>
-
-			{/* Задача 4 */}
-			<div>
-				<input
-					type='number'
-					value={num}
-					onChange={e => setNum(e.target.value)}
-					onBlur={handleSumDigits}
-					placeholder='Введите число'
-				/>
-				<p>Сумма цифр: {sumDigits}</p>
-			</div>
-
-			{/* Задача 5 */}
-			<div>
-				<input
-					type='number'
-					value={num}
-					onChange={e => setNum(e.target.value)}
-					onBlur={handleProductDivisors}
-					placeholder='Введите число'
-				/>
-				<p>Произведение делителей: {productDivisors}</p>
+				<p>Сумма чисел: {sum}</p>
 			</div>
 		</div>
 	)
