@@ -1,23 +1,15 @@
-import React from 'react'
-import styles from './Inputs.module.css'
+import React, { useEffect } from 'react'
 
-function Inputs() {
-	return (
-		<div className={styles.inputContainer}>
-			<input className={styles.input} placeholder='Input 1' />
-			<input className={styles.input} placeholder='Input 2' />
-			<input className={styles.input} placeholder='Input 3' />
-		</div>
-	)
-}
 function App() {
+	useEffect(() => {
+		document.title = 'Новое название страницы'
+	}, []) // Пустой массив зависимостей, чтобы выполнить только один раз после рендера.
+
 	return (
-		<div className={styles.app}>
-			<h2 className={styles.title}>Inputs with Shadow</h2>
-			<div className={styles.inputWrapper}>
-				<Inputs />
-			</div>
+		<div>
+			<h1>React App</h1>
 		</div>
 	)
 }
-export default Inputs
+
+export default App
