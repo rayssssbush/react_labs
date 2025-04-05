@@ -7,5 +7,11 @@ function getDigitsSum(number) {
 	return sum
 }
 
-const result = getDigitsSum(123) // Вызов функции с числом 123
-console.log(result) // Выводим результат на экран
+const result = getDigitsSum(12345) // Вызов функции с числом 12345
+
+// Создаем элемент абзаца и выводим в него результат
+const pElement = document.createElement('p')
+pElement.textContent = `Сумма цифр числа 12345: ${result}`
+
+// Добавляем абзац на страницу
+document.body.appendChild(pElement)
