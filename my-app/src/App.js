@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function App() {
-	// Состояние для хранения выбранного города
-	const [selectedCity, setSelectedCity] = useState('')
-
 	// Массив городов
 	const cities = [
 		'Москва',
@@ -15,14 +12,11 @@ function App() {
 
 	return (
 		<div>
-			{/* Выпадающий список городов */}
 			<label>
 				Выберите город:
-				<select
-					onChange={e => setSelectedCity(e.target.value)}
-					value={selectedCity}
-				>
+				<select>
 					<option value=''>Выберите город</option>
+					{/* Используем цикл для отображения городов */}
 					{cities.map((city, index) => (
 						<option key={index} value={city}>
 							{city}
@@ -30,9 +24,6 @@ function App() {
 					))}
 				</select>
 			</label>
-
-			{/* Абзац с выбранным городом */}
-			{selectedCity && <p>Вы выбрали: {selectedCity}</p>}
 		</div>
 	)
 }
