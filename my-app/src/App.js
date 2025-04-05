@@ -1,7 +1,7 @@
 function App() {
-	const isAuth = true // Проверка на авторизацию
+	const isAuth = false // Проверка на авторизацию
 
-	return <div>{isAuth && <p>вы авторизованы</p>}</div>
+	return <div>{!isAuth && <p>пожалуйста, авторизуйтесь</p>}</div>
 }
 
 export default App
