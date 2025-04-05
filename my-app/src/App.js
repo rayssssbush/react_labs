@@ -38,14 +38,17 @@ function App() {
 					</tr>
 				</thead>
 				<tbody>
-					{users.map(user => (
-						<User
-							key={user.id}
-							name={user.name}
-							surn={user.surn}
-							age={user.age}
-						/>
-					))}
+					{
+						// Цикл для вывода пользователей
+						users.map(user => (
+							<User
+								key={user.id}
+								name={user.name}
+								surn={user.surn}
+								age={user.age}
+							/>
+						))
+					}
 				</tbody>
 			</table>
 		</div>
