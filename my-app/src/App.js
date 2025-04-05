@@ -1,13 +1,18 @@
-// App.js
-import React from 'react'
-import { MyContext } from './MyContext'
-import Parent from './Parent'
+import { useRef } from 'react'
 
 function App() {
+	const textRef = useRef('text')
+
+	const handleClick = () => {
+		textRef.current += '!'
+		console.log(textRef.current) // здесь будет видно изменение
+	}
+
 	return (
-		<MyContext.Provider value={42}>
-			<Parent />
-		</MyContext.Provider>
+		<div>
+			<p>text</p> {/* отображается статично */}
+			<button onClick={handleClick}>Добавить !</button>
+		</div>
 	)
 }
 
