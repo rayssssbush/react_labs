@@ -1,11 +1,7 @@
 function App() {
-	const age = 19 // Возраст пользователя
+	const isAuth = true // Проверка на авторизацию
 
-	return (
-		<div>
-			{age > 18 ? <p>Вы совершеннолетний.</p> : <p>Вы несовершеннолетний.</p>}
-		</div>
-	)
+	return <div>{isAuth && <p>вы авторизованы</p>}</div>
 }
 
 export default App
