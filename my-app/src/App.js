@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 // Функция для генерации уникальных ID (можно заменить на библиотеку)
@@ -7,25 +7,24 @@ function id() {
 }
 
 // Компонент User
-function User({ name, surn, age }) {
+function User({ name, surname, age }) {
 	return (
 		<tr>
 			<td>{name}</td>
-			<td>{surn}</td>
+			<td>{surname}</td>
 			<td>{age}</td>
 		</tr>
 	)
 }
 
-// Массив пользователей
-const users = [
-	{ id: id(), name: 'user1', surn: 'surn1', age: 30 },
-	{ id: id(), name: 'user2', surn: 'surn2', age: 31 },
-	{ id: id(), name: 'user3', surn: 'surn3', age: 32 },
-]
+// Компонент Users
+function Users() {
+	const [users] = useState([
+		{ id: id(), name: 'user1', surname: 'surn1', age: 30 },
+		{ id: id(), name: 'user2', surname: 'surn2', age: 31 },
+		{ id: id(), name: 'user3', surname: 'surn3', age: 32 },
+	])
 
-// Компонент App
-function App() {
 	return (
 		<div>
 			<h1>Список пользователей</h1>
@@ -44,7 +43,7 @@ function App() {
 							<User
 								key={user.id}
 								name={user.name}
-								surn={user.surn}
+								surname={user.surname}
 								age={user.age}
 							/>
 						))
@@ -55,5 +54,5 @@ function App() {
 	)
 }
 
-// Рендерим компонент App
-ReactDOM.render(<App />, document.getElementById('root'))
+// Рендерим компонент Users
+ReactDOM.render(<Users />, document.getElementById('root'))
