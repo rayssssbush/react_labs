@@ -35,3 +35,23 @@
 .inputWrapper {
 	margin-top: 20px;
 }
+/* Класс для тени и других эффектов */
+.beauty {
+	box-shadow: rgba(50, 50, 50, 0.2) 0 5px 5px 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+/* Общий класс для всех инпутов */
+.common-input {
+	padding: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin: 5px;
+}
+
+/* Применение стилей с тенью из App.module.css */
+.input {
+	composes: beauty from '../App.module.css'; /* Подключаем тени и курсор */
+	composes: common-input; /* Общие стили для всех инпутов */
+}

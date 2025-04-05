@@ -10,5 +10,14 @@ function Inputs() {
 		</div>
 	)
 }
-
+function App() {
+	return (
+		<div className={styles.app}>
+			<h2 className={styles.title}>Inputs with Shadow</h2>
+			<div className={styles.inputWrapper}>
+				<Inputs />
+			</div>
+		</div>
+	)
+}
 export default Inputs
