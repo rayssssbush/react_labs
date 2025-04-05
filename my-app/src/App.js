@@ -1,23 +1,50 @@
 import React from 'react'
 
-// Компонент User
-function User() {
+// Компонент Employee
+function Employee({ surname, name, patronymic, salary }) {
 	return (
 		<div>
-			<h2>Пользователь</h2>
-			<p>Здесь будет информация о пользователе.</p>
+			<h2>Работник</h2>
+			<p>
+				<strong>Фамилия:</strong> {surname}
+			</p>
+			<p>
+				<strong>Имя:</strong> {name}
+			</p>
+			<p>
+				<strong>Отчество:</strong> {patronymic}
+			</p>
+			<p>
+				<strong>Зарплата:</strong> {salary} руб.
+			</p>
+			<hr />
 		</div>
 	)
 }
 
-// Компонент App, который использует несколько экземпляров компонента User
+// Компонент App, который использует несколько экземпляров компонента Employee
 function App() {
 	return (
 		<div>
-			<h1>Мой сайт</h1>
-			<User /> {/* Первый экземпляр компонента User */}
-			<User /> {/* Второй экземпляр компонента User */}
-			<User /> {/* Третий экземпляр компонента User */}
+			<h1>Данные о работниках</h1>
+			<Employee
+				surname='Иванов'
+				name='Иван'
+				patronymic='Иванович'
+				salary='50000'
+			/>
+			<Employee
+				surname='Петров'
+				name='Петр'
+				patronymic='Петрович'
+				salary='60000'
+			/>
+			<Employee
+				surname='Сидоров'
+				name='Сидор'
+				patronymic='Сидорович'
+				salary='55000'
+			/>
 		</div>
 	)
 }
