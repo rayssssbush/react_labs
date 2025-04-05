@@ -1,97 +1,45 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import Product from './Product' // Если это отдельный компонент
 
-// Функция для генерации случайного id
-function id() {
-	return Math.random().toString(36).substr(2, 9)
-}
-
-// Изначальные данные с пользователями
-const initUsers = [
-	{ id: id(), name: 'user1', surname: 'surn1', age: 30 },
-	{ id: id(), name: 'user2', surname: 'surn2', age: 31 },
-	{ id: id(), name: 'user3', surname: 'surn3', age: 32 },
+const initProds = [
+	{ id: 1, name: 'prod1', cost: 'cost1', catg: 'catg1' },
+	{ id: 2, name: 'prod2', cost: 'cost2', catg: 'catg2' },
+	{ id: 3, name: 'prod3', cost: 'cost3', catg: 'catg3' },
 ]
 
-// Компонент для отображения полей каждого пользователя
-function UserField({ id, text, type, changeField }) {
-	const [isEdit, setIsEdit] = useState(false)
+function App() {
+	const [prods, setProds] = useState(initProds)
 
-	return (
-		<td>
-			{isEdit ? (
-				<input
-					value={text}
-					onChange={event => changeField(id, type, event)}
-					onBlur={() => setIsEdit(false)}
-				/>
-			) : (
-				<span onClick={() => setIsEdit(true)}>{text}</span>
-			)}
-		</td>
-	)
-}
-
-// Компонент для отображения данных одного пользователя
-function User({ id, name, surname, age, changeField }) {
-	return (
-		<tr>
-			<UserField id={id} text={name} type='name' changeField={changeField} />
-			<UserField
-				id={id}
-				text={surname}
-				type='surname'
-				changeField={changeField}
-			/>
-			<UserField id={id} text={age} type='age' changeField={changeField} />
-		</tr>
-	)
-}
-
-// Главный компонент, который управляет состоянием пользователей
-function Users() {
-	const [users, setUsers] = useState(initUsers)
-
+	// Функция для обновления данных
 	function changeField(id, field, event) {
-		setUsers(
-			users.map(user => {
-				if (user.id === id) {
-					user[field] = event.target.value
+		setProds(
+			prods.map(prod => {
+				if (prod.id === id) {
+					prod[field] = event.target.value
 				}
-				return user
+				return prod
 			})
 		)
 	}
 
-	const rows = users.map(user => {
-		return (
-			<User
-				key={user.id}
-				id={user.id}
-				name={user.name}
-				surname={user.surname}
-				age={user.age}
-				changeField={changeField}
-			/>
-		)
-	})
+	const rows = prods.map(prod => (
+		<Product
+			key={prod.id}
+			id={prod.id}
+			name={prod.name}
+			cost={prod.cost}
+			catg={prod.catg}
+			changeField={changeField}
+		/>
+	))
 
 	return (
 		<div>
-			<h1>Список пользователей</h1>
-			<table border='1'>
-				<thead>
-					<tr>
-						<th>Имя</th>
-						<th>Фамилия</th>
-						<th>Возраст</th>
-					</tr>
-				</thead>
+			<table>
 				<tbody>{rows}</tbody>
 			</table>
 		</div>
 	)
 }
 
-// Рендеринг компонента на экран
-ReactDOM.render(<Users />, document.getElementById('root'))
+export default App
