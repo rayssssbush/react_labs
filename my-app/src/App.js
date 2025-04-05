@@ -1,17 +1,16 @@
-function getDigitsSum(number) {
-	// Преобразуем число в строку, разделяем на массив цифр, затем суммируем их
-	const sum = number
-		.toString()
-		.split('')
-		.reduce((acc, digit) => acc + Number(digit), 0)
-	return sum
+function App() {
+	function show1() {
+		alert(1)
+	}
+
+	function show2() {
+		alert(2)
+	}
+
+	return (
+		<div>
+			<button onClick={show1}>act1</button>
+			<button onClick={show2}>act2</button>
+		</div>
+	)
 }
-
-const result = getDigitsSum(12345) // Вызов функции с числом 12345
-
-// Создаем элемент абзаца и выводим в него результат
-const pElement = document.createElement('p')
-pElement.textContent = `Сумма цифр числа 12345: ${result}`
-
-// Добавляем абзац на страницу
-document.body.appendChild(pElement)
