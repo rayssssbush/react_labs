@@ -8,7 +8,7 @@ const Container = styled.div`
 	margin: 20px;
 `
 
-// Стили для кнопок
+// Стили для кнопок с условным рендерингом
 const Button = styled.button`
 	padding: 10px 20px;
 	font-size: 16px;
@@ -16,11 +16,8 @@ const Button = styled.button`
 	border-radius: 5px;
 	cursor: pointer;
 
-	// Дополнительные стили для заблокированной кнопки
-	&:disabled {
-		background-color: gray;
-		cursor: not-allowed;
-	}
+	background-color: ${props => (props.warn ? 'yellow' : 'green')};
+	color: ${props => (props.warn ? 'red' : 'white')};
 `
 
 function Block() {
@@ -29,8 +26,8 @@ function Block() {
 			{/* Первая кнопка заблокирована */}
 			<Button disabled>Button 1 (Disabled)</Button>
 
-			{/* Вторая кнопка обычная */}
-			<Button>Button 2</Button>
+			{/* Вторая кнопка с пропсом warn */}
+			<Button warn>Button 2 (Warn)</Button>
 
 			{/* Третья кнопка типа reset */}
 			<Button type='reset'>Button 3 (Reset)</Button>
