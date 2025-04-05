@@ -1,4 +1,31 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+
+// Стили с использованием Styled Components
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+`
+
+const Heading = styled.h2`
+	font-size: 24px;
+	font-weight: bold;
+`
+
+const Input = styled.input`
+	padding: 10px;
+	font-size: 16px;
+	margin: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+`
+
+const Result = styled.p`
+	font-size: 20px;
+	margin-bottom: 20px;
+`
 
 function App() {
 	// Состояния для компонентов
@@ -7,41 +34,6 @@ function App() {
 	const [nums, setNums] = useState([1, 2, 3])
 	const [notes, setNotes] = useState([1, 2, 3, 4, 5])
 	const [editNum, setEditNum] = useState(null)
-
-	// Определение переменных для CSS свойств
-	const padding = '10px'
-	const fontSize = '16px'
-	const margin = '10px'
-	const borderRadius = '5px'
-	const borderColor = '#ccc'
-	const fontSizeResult = '20px'
-	const fontSizeHeading = '24px'
-	const fontWeight = 'bold'
-
-	// Стили для компонентов
-	const styles = {
-		inputStyle: {
-			padding: padding,
-			fontSize: fontSize,
-			margin: margin,
-			borderRadius: borderRadius,
-			border: `1px solid ${borderColor}`,
-		},
-		resultStyle: {
-			fontSize: fontSizeResult,
-			marginBottom: '20px',
-		},
-		containerStyle: {
-			display: 'flex',
-			flexDirection: 'column',
-			alignItems: 'center',
-			marginTop: '20px',
-		},
-		headingStyle: {
-			fontSize: fontSizeHeading,
-			fontWeight: fontWeight,
-		},
-	}
 
 	// Функция для конвертации температуры
 	const fahrenheitToCelsius = f => ((f - 32) * 5) / 9
@@ -82,55 +74,37 @@ function App() {
 	}
 
 	return (
-		<div style={styles.containerStyle}>
+		<Container>
 			{/* Конвертер температуры */}
 			<div>
-				<h2 style={styles.headingStyle}>Temperature Converter</h2>
-				<input
+				<Heading>Temperature Converter</Heading>
+				<Input
 					type='number'
 					value={fahrenheit}
 					onChange={handleFahrenheitChange}
 					placeholder='Fahrenheit'
-					style={styles.inputStyle}
 				/>
-				<input
-					type='text'
-					value={celsius}
-					readOnly
-					placeholder='Celsius'
-					style={styles.inputStyle}
-				/>
+				<Input type='text' value={celsius} readOnly placeholder='Celsius' />
 			</div>
 
 			{/* Калькулятор суммы */}
 			<div>
-				<h2 style={styles.headingStyle}>Sum Calculator</h2>
-				<p style={styles.resultStyle}>Sum: {sum}</p>
-				<input
-					value={value}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					style={styles.inputStyle}
-				/>
+				<Heading>Sum Calculator</Heading>
+				<Result>Sum: {sum}</Result>
+				<Input value={value} onChange={handleChange} onBlur={handleBlur} />
 			</div>
 
 			{/* Редактирование элементов массива */}
 			<div>
-				<h2 style={styles.headingStyle}>Edit Notes</h2>
+				<Heading>Edit Notes</Heading>
 				{notes.map((note, index) => (
 					<p key={index} onClick={() => startEdit(index)}>
 						{note}
 					</p>
 				))}
-				{editNum !== null && (
-					<input
-						value={value}
-						onChange={changeItem}
-						style={styles.inputStyle}
-					/>
-				)}
+				{editNum !== null && <Input value={value} onChange={changeItem} />}
 			</div>
-		</div>
+		</Container>
 	)
 }
 
