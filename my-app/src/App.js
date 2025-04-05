@@ -1,12 +1,12 @@
 function App() {
-	const name = 'user'
-	const age = '30'
+	const arr = [1, 2, 3, 4, 5]
 
 	return (
-		<div>
-			name: {name}
-			age: {age}
-		</div>
+		<ul>
+			{arr.map(item => (
+				<li key={item}>{item}</li>
+			))}
+		</ul>
 	)
 }
 
