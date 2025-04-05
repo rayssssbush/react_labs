@@ -1,69 +1,73 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Инициализация массива с числами
-	const [numbers, setNumbers] = useState([1, 2, 3, 4, 5])
+	const [list, setList] = useState([])
 	const [inputValue, setInputValue] = useState('')
 
-	// Функция для возведения числа в квадрат
-	const handleSquare = index => {
-		const newNumbers = [...numbers]
-		newNumbers[index] = newNumbers[index] ** 2
-		setNumbers(newNumbers)
+	// Добавление нового элемента в список
+	const addItem = () => {
+		setList([...list, inputValue])
+		setInputValue('')
 	}
 
-	// Функция для удаления элемента
-	const handleDelete = index => {
-		const newNumbers = numbers.filter((_, i) => i !== index)
-		setNumbers(newNumbers)
-	}
+	// Функция для добавления элемента с использованием нескольких инпутов
+	const [input1, setInput1] = useState('')
+	const [input2, setInput2] = useState('')
+	const [input3, setInput3] = useState('')
 
-	// Функция для переворота порядка списка
-	const reverseOrder = () => {
-		setNumbers([...numbers].reverse())
-	}
-
-	// Функция для установки текста в инпут при клике на li
-	const handleClick = text => {
-		setInputValue(text)
-	}
-
-	// Функция для обновления текста в li при потере фокуса
-	const handleBlur = index => {
-		const newNumbers = [...numbers]
-		newNumbers[index] = inputValue
-		setNumbers(newNumbers)
+	const addItemWithInputs = () => {
+		const newItem = `${input1} ${input2} ${input3}`
+		setList([...list, newItem])
+		setInput1('')
+		setInput2('')
+		setInput3('')
 	}
 
 	return (
 		<div>
-			<h1>Список чисел</h1>
-			<ul>
-				{numbers.map((number, index) => (
-					<li key={index}>
-						{number}
-						<button onClick={() => handleDelete(index)}>Удалить</button>
-						<button onClick={() => handleSquare(index)}>Квадрат</button>
-					</li>
-				))}
-			</ul>
+			<h1>Добавить элемент в список</h1>
 
-			<button onClick={reverseOrder}>Перевернуть порядок</button>
-
+			{/* Кнопка для добавления одного элемента */}
 			<input
 				type='text'
 				value={inputValue}
 				onChange={e => setInputValue(e.target.value)}
-				onBlur={() => handleBlur(numbers.indexOf(inputValue))}
-				placeholder='Изменить число'
+				placeholder='Введите текст'
 			/>
+			<button onClick={addItem}>Добавить элемент</button>
 
-			<h2>Кликните на число, чтобы изменить его:</h2>
 			<ul>
-				{numbers.map((number, index) => (
-					<li key={index} onClick={() => handleClick(number)}>
-						{number}
-					</li>
+				{list.map((item, index) => (
+					<li key={index}>{item}</li>
+				))}
+			</ul>
+
+			<h2>Добавить элемент с тремя инпутами</h2>
+
+			{/* Три инпута для добавления нового элемента */}
+			<input
+				type='text'
+				value={input1}
+				onChange={e => setInput1(e.target.value)}
+				placeholder='Первое поле'
+			/>
+			<input
+				type='text'
+				value={input2}
+				onChange={e => setInput2(e.target.value)}
+				placeholder='Второе поле'
+			/>
+			<input
+				type='text'
+				value={input3}
+				onChange={e => setInput3(e.target.value)}
+				placeholder='Третье поле'
+			/>
+			<button onClick={addItemWithInputs}>Добавить с инпутами</button>
+
+			<ul>
+				{list.map((item, index) => (
+					<li key={index}>{item}</li>
 				))}
 			</ul>
 		</div>
