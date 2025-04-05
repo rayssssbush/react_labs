@@ -1,11 +1,11 @@
 function App() {
-	const handleClick = (event, param1, param2) => {
-		console.log(event) // Выводим объект события
+	const handleClick = (param1, event, param2) => {
 		console.log(param1, param2) // Выводим два параметра
+		console.log(event) // Выводим объект события
 	}
 
 	return (
-		<button onClick={event => handleClick(event, 'first', 'second')}>
+		<button onClick={event => handleClick('first', event, 'second')}>
 			Click me
 		</button>
 	)
