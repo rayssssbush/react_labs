@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 
 function App() {
-	const [isBanned, setIsBanned] = useState(false)
+	// Стейт для хранения числа (например, возраста)
+	const [age, setAge] = useState(25)
 
-	const banUser = () => setIsBanned(true)
-	const unbanUser = () => setIsBanned(false)
+	// Функции для изменения значения
+	const increaseAge = () => {
+		setAge(age + 1)
+	}
+
+	const decreaseAge = () => {
+		setAge(age - 1)
+	}
 
 	return (
 		<div>
-			<h1>{isBanned ? 'Пользователь забанен' : 'Пользователь не забанен'}</h1>
+			<h1>Возраст: {age}</h1>
 
-			{/* Показываем только одну кнопку в зависимости от состояния */}
-			{isBanned ? (
-				<button onClick={unbanUser}>Разбанить пользователя</button>
-			) : (
-				<button onClick={banUser}>Забанить пользователя</button>
-			)}
+			{/* Кнопки для увеличения и уменьшения возраста */}
+			<button onClick={increaseAge}>Увеличить возраст</button>
+			<button onClick={decreaseAge}>Уменьшить возраст</button>
 		</div>
 	)
 }
