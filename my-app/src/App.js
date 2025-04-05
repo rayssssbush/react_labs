@@ -13,6 +13,15 @@ function TemperatureConverter() {
 
 	const celsius = fahrenheit ? fahrenheitToCelsius(fahrenheit).toFixed(2) : ''
 
+	// Стиль для компонентов
+	const inputStyle = {
+		padding: '10px',
+		fontSize: '16px',
+		margin: '10px',
+		borderRadius: '5px',
+		border: '1px solid #ccc',
+	}
+
 	return (
 		<div>
 			<input
@@ -20,8 +29,15 @@ function TemperatureConverter() {
 				value={fahrenheit}
 				onChange={handleFahrenheitChange}
 				placeholder='Fahrenheit'
+				style={inputStyle} // Применение стиля к элементу
 			/>
-			<input type='text' value={celsius} readOnly placeholder='Celsius' />
+			<input
+				type='text'
+				value={celsius}
+				readOnly
+				placeholder='Celsius'
+				style={inputStyle} // Применение стиля к элементу
+			/>
 		</div>
 	)
 }
@@ -45,10 +61,29 @@ function Calculator() {
 
 	const sum = nums.reduce((acc, elem) => acc + Number(elem), 0)
 
+	// Стиль для компонентов
+	const inputStyle = {
+		padding: '10px',
+		fontSize: '16px',
+		margin: '10px',
+		borderRadius: '5px',
+		border: '1px solid #ccc',
+	}
+
+	const resultStyle = {
+		fontSize: '20px',
+		marginBottom: '20px',
+	}
+
 	return (
 		<div>
-			<p>Sum: {sum}</p>
-			<input value={value} onChange={handleChange} onBlur={handleBlur} />
+			<p style={resultStyle}>Sum: {sum}</p>
+			<input
+				value={value}
+				onChange={handleChange}
+				onBlur={handleBlur}
+				style={inputStyle} // Применение стиля к элементу
+			/>
 		</div>
 	)
 }
@@ -77,11 +112,26 @@ function App() {
 		setValue(event.target.value)
 	}
 
+	// Стиль для компонентов
+	const inputStyle = {
+		padding: '10px',
+		fontSize: '16px',
+		margin: '10px',
+		borderRadius: '5px',
+		border: '1px solid #ccc',
+	}
+
 	return (
 		<div>
 			<h2>Notes</h2>
 			{result}
-			{editNum !== null && <input value={value} onChange={changeItem} />}
+			{editNum !== null && (
+				<input
+					value={value}
+					onChange={changeItem}
+					style={inputStyle} // Применение стиля к элементу
+				/>
+			)}
 		</div>
 	)
 }
