@@ -1,7 +1,11 @@
-function App() {
-	const isAuth = false // Проверка на авторизацию
-
-	return <div>{!isAuth && <p>пожалуйста, авторизуйтесь</p>}</div>
+function getDigitsSum(number) {
+	// Преобразуем число в строку, разделяем на массив цифр, затем суммируем их
+	const sum = number
+		.toString()
+		.split('')
+		.reduce((acc, digit) => acc + Number(digit), 0)
+	return sum
 }
 
-export default App
+const result = getDigitsSum(123) // Вызов функции с числом 123
+console.log(result) // Выводим результат на экран
