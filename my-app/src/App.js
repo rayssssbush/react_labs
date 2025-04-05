@@ -1,17 +1,15 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 
 function App() {
-	const textRef = useRef('text')
+	const [text, setText] = useState('react')
 
-	const handleClick = () => {
-		textRef.current += '!'
-		console.log(textRef.current) // здесь будет видно изменение
+	function handleTextClick() {
+		setText(prev => prev + '!')
 	}
 
 	return (
 		<div>
-			<p>text</p> {/* отображается статично */}
-			<button onClick={handleClick}>Добавить !</button>
+			<p onClick={handleTextClick}>{text}</p>
 		</div>
 	)
 }
