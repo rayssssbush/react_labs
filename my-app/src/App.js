@@ -1,26 +1,43 @@
 import React, { useState, useEffect } from 'react'
 
 function App() {
-	const [color, setColor] = useState('white')
+	const [isVisible, setIsVisible] = useState(false)
 
-	// Обработчик клика для изменения фона
-	function handleClick() {
-		setColor(color === 'white' ? 'lightblue' : 'white') // Меняем фон на светло-голубой или белый
+	// Обработчик клика для скрытия блока
+	function handleClickOutside(event) {
+		if (!event.target.closest('.popup')) {
+			setIsVisible(false) // Скрываем блок, если клик был вне его
+		}
 	}
 
+	// Очистка и добавление обработчика события
 	useEffect(() => {
-		// Добавляем обработчик кликов на документ
-		document.addEventListener('click', handleClick)
-
-		// Очистка при размонтировании компонента
-		return () => {
-			document.removeEventListener('click', handleClick)
+		if (isVisible) {
+			document.addEventListener('click', handleClickOutside)
 		}
-	}, [color])
+		return () => {
+			document.removeEventListener('click', handleClickOutside)
+		}
+	}, [isVisible])
 
 	return (
-		<div style={{ backgroundColor: color, height: '100vh' }}>
-			<h1>Click anywhere to change background color</h1>
+		<div>
+			<a href='#' onClick={() => setIsVisible(true)}>
+				Show Block
+			</a>
+
+			{isVisible && (
+				<div
+					className='popup'
+					style={{
+						padding: '20px',
+						backgroundColor: 'lightgreen',
+						marginTop: '10px',
+					}}
+				>
+					<p>This is a popup! Click anywhere outside to close it.</p>
+				</div>
+			)}
 		</div>
 	)
 }
