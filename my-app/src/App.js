@@ -1,12 +1,12 @@
 function App() {
-	const handleClick = (param1, event, param2) => {
-		console.log(param1, param2) // Выводим два параметра
-		console.log(event) // Выводим объект события
-	}
+	const arr = [<li>1</li>, <li>2</li>, <li>3</li>, <li>4</li>, <li>5</li>]
 
 	return (
-		<button onClick={event => handleClick('first', event, 'second')}>
-			Click me
-		</button>
+		<ul>
+			{arr.map(item => item)}{' '}
+			{/* Мапим элементы массива и отображаем их внутри ul */}
+		</ul>
 	)
 }
+
+export default App
