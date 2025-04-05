@@ -1,45 +1,35 @@
+// App.js
 import React, { useState } from 'react'
-import Product from './Product' // Если это отдельный компонент
-
-const initProds = [
-	{ id: 1, name: 'prod1', cost: 'cost1', catg: 'catg1' },
-	{ id: 2, name: 'prod2', cost: 'cost2', catg: 'catg2' },
-	{ id: 3, name: 'prod3', cost: 'cost3', catg: 'catg3' },
-]
 
 function App() {
-	const [prods, setProds] = useState(initProds)
+	const [notes, setNotes] = useState([1, 2, 3, 4, 5])
+	const [editNum, setEditNum] = useState(null)
+	const [value, setValue] = useState('')
 
-	// Функция для обновления данных
-	function changeField(id, field, event) {
-		setProds(
-			prods.map(prod => {
-				if (prod.id === id) {
-					prod[field] = event.target.value
-				}
-				return prod
-			})
-		)
+	const result = notes.map((note, index) => (
+		<p key={index} onClick={() => startEdit(index)}>
+			{note}
+		</p>
+	))
+
+	function startEdit(index) {
+		setEditNum(index)
+		setValue(notes[index])
 	}
 
-	const rows = prods.map(prod => (
-		<Product
-			key={prod.id}
-			id={prod.id}
-			name={prod.name}
-			cost={prod.cost}
-			catg={prod.catg}
-			changeField={changeField}
-		/>
-	))
+	function changeItem(event) {
+		setValue(event.target.value)
+		const updatedNotes = [...notes]
+		updatedNotes[editNum] = event.target.value
+		setNotes(updatedNotes)
+	}
 
 	return (
 		<div>
-			<table>
-				<tbody>{rows}</tbody>
-			</table>
+			{result}
+			{editNum !== null && <input value={value} onChange={changeItem} />}
 		</div>
 	)
 }
 
-export default App
+export default App // Правильный экспорт компонента
