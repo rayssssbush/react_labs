@@ -1,37 +1,29 @@
 import React, { useState } from 'react'
 
 function App() {
-	// Стейты для хранения текста из инпутов
-	const [inputText1, setInputText1] = useState('')
-	const [inputText2, setInputText2] = useState('')
+	// Стейт для хранения температуры в Фаренгейтах
+	const [fahrenheit, setFahrenheit] = useState('')
 
-	// Функции для обновления стейтов
-	const handleInput1Change = event => {
-		setInputText1(event.target.value)
+	// Функция для обработки изменения инпута
+	const handleFahrenheitChange = event => {
+		setFahrenheit(event.target.value)
 	}
 
-	const handleInput2Change = event => {
-		setInputText2(event.target.value)
-	}
+	// Конвертация в Цельсий
+	const celsius = fahrenheit ? ((fahrenheit - 32) * 5) / 9 : ''
 
 	return (
 		<div>
-			{/* Первый инпут */}
+			{/* Инпут для ввода температуры в Фаренгейтах */}
 			<input
-				type='text'
-				value={inputText1}
-				onChange={handleInput1Change}
-				placeholder='Введите текст 1'
+				type='number'
+				value={fahrenheit}
+				onChange={handleFahrenheitChange}
+				placeholder='Введите температуру в Фаренгейтах'
 			/>
-			<p>{inputText1}</p> {/* Вывод текста из первого инпута */}
-			{/* Второй инпут */}
-			<input
-				type='text'
-				value={inputText2}
-				onChange={handleInput2Change}
-				placeholder='Введите текст 2'
-			/>
-			<p>{inputText2}</p> {/* Вывод текста из второго инпута */}
+
+			{/* Абзац, показывающий температуру в Цельсиях */}
+			{fahrenheit && <p>Температура в Цельсиях: {celsius.toFixed(2)}</p>}
 		</div>
 	)
 }
