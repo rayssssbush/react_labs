@@ -1,46 +1,39 @@
 import React, { useState } from 'react'
 
 function App() {
-	const [favoriteLanguage, setFavoriteLanguage] = useState('')
+	const initialArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-	const handleLanguageChange = event => {
-		setFavoriteLanguage(event.target.value)
+	const [numbers, setNumbers] = useState(initialArray)
+
+	// Функция для подсчета среднего арифметического
+	const calculateAverage = () => {
+		const sum = numbers.reduce((acc, curr) => acc + curr, 0)
+		return sum / numbers.length
+	}
+
+	// Обработчик для изменения значений массива
+	const handleInputChange = (index, value) => {
+		const updatedNumbers = [...numbers]
+		updatedNumbers[index] = Number(value)
+		setNumbers(updatedNumbers)
 	}
 
 	return (
 		<div>
-			<label>
-				<input
-					type='radio'
-					name='language'
-					value='JavaScript'
-					onChange={handleLanguageChange}
-				/>
-				JavaScript
-			</label>
-			<label>
-				<input
-					type='radio'
-					name='language'
-					value='Python'
-					onChange={handleLanguageChange}
-				/>
-				Python
-			</label>
-			<label>
-				<input
-					type='radio'
-					name='language'
-					value='Java'
-					onChange={handleLanguageChange}
-				/>
-				Java
-			</label>
+			<h2>Среднее арифметическое: {calculateAverage()}</h2>
 
-			<p>Ваш любимый язык программирования: {favoriteLanguage}</p>
-			{favoriteLanguage === 'JavaScript' && (
-				<p>Отличный выбор! JavaScript — это супер!</p>
-			)}
+			{numbers.map((num, index) => (
+				<div key={index}>
+					<label>
+						Элемент {index + 1}:
+						<input
+							type='number'
+							value={num}
+							onChange={e => handleInputChange(index, e.target.value)}
+						/>
+					</label>
+				</div>
+			))}
 		</div>
 	)
 }
