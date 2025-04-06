@@ -1,22 +1,17 @@
-// src/main.jsx
-import { createBrowserRouter } from 'react-router-dom'
-import Root, { loader as rootLoader } from './routes/root' // Импортируем компонент Root и его loader
-import ErrorPage404 from './routes/ErrorPage404'
-import Product from './routes/product'
+import Root, { loader as rootLoader, action as rootAction } from './routes/root'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Root />,
 		errorElement: <ErrorPage404 />,
-		loader: rootLoader, // Добавляем загрузчик
+		loader: rootLoader,
+		action: rootAction, // Добавляем action
 		children: [
 			{
-				path: 'products/:productId',
-				element: <Product />,
+				path: 'students/:studentId',
+				element: <Student />,
 			},
 		],
 	},
 ])
-
-export default router

@@ -1,4 +1,11 @@
 import { useLoaderData, Link, Outlet, Form } from 'react-router-dom'; // Импортируем необходимые компоненты
+import { createStudent } from '../forStorage'; // Импортируем функцию для создания студента
+
+// Функция action для создания студента
+export async function action() {
+  const student = await createStudent(); // Создаем студента
+  return { student }; // Возвращаем нового студента
+}
 
 function Root() {
   const { students } = useLoaderData(); // Получаем данные студентов через useLoaderData
