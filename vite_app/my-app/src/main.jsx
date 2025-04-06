@@ -1,19 +1,22 @@
 import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {
+	createBrowserRouter,
+	RouterProvider,
+	createRoutesFromElements,
+	Route,
+} from 'react-router-dom'
 
-// Создаем роутер с основным маршрутом
-const router = createBrowserRouter([
-	{
-		path: '/', // Главная страница
-		element: <p>I'm number one in React!</p>, // Выводим нужный текст
-	},
-])
+// Новый код с использованием JSX
+const router = createBrowserRouter(
+	createRoutesFromElements(
+		<Route path='/' element={<p>I'm number one in React!</p>} />
+	)
+)
 
-// Рендерим приложение
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider router={router} /> {/* Подключаем роутер */}
+		<RouterProvider router={router} />
 	</React.StrictMode>
 )
