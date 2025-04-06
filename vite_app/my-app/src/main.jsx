@@ -1,33 +1,22 @@
 // src/main.jsx
-import './index.css'
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Root from './routes/root' // Импортируем Root компонент
-import Product from './routes/product' // Импортируем Product компонент
-import Student from './routes/student' // Импортируем Student компонент
-import ErrorPage404 from './error-page-404' // Импортируем страницу ошибки
+import { createBrowserRouter } from 'react-router-dom'
+import Root, { loader as rootLoader } from './routes/root' // Импортируем компонент Root и его loader
+import ErrorPage404 from './routes/ErrorPage404'
+import Product from './routes/product'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Root />, // Основной маршрут
-		errorElement: <ErrorPage404 />, // Компонент ошибки 404
+		element: <Root />,
+		errorElement: <ErrorPage404 />,
+		loader: rootLoader, // Добавляем загрузчик
 		children: [
 			{
 				path: 'products/:productId',
-				element: <Product />, // Вложенный маршрут для страницы продукта
-			},
-			{
-				path: 'students/:studentId',
-				element: <Student />, // Вложенный маршрут для страницы студента
+				element: <Product />,
 			},
 		],
 	},
 ])
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-		<RouterProvider router={router} />
-	</React.StrictMode>
-)
+export default router
