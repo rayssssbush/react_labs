@@ -81,3 +81,28 @@ a {
 	text-decoration: none;
 	color: blue;
 }
+/* src/index.css */
+h1,
+h2 {
+	margin: 0;
+}
+
+div#main {
+	display: flex;
+	margin: 20px;
+}
+
+nav {
+	display: flex;
+	flex-direction: column;
+}
+
+div#content {
+	margin-left: 40px;
+}
+
+a {
+	text-decoration: none;
+	color: blue;
+	margin-bottom: 10px;
+}

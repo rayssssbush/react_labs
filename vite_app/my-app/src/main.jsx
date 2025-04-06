@@ -13,14 +13,16 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <Root />, // Основной маршрут
 		errorElement: <ErrorPage404 />, // Компонент ошибки 404
-	},
-	{
-		path: 'products/:productId',
-		element: <Product />, // Маршрут для страницы продукта
-	},
-	{
-		path: 'students/:studentId',
-		element: <Student />, // Новый маршрут для страницы студента
+		children: [
+			{
+				path: 'products/:productId',
+				element: <Product />, // Вложенный маршрут для страницы продукта
+			},
+			{
+				path: 'students/:studentId',
+				element: <Student />, // Вложенный маршрут для страницы студента
+			},
+		],
 	},
 ])
 
